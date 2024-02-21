@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var SPEED = 300.0
 @export var JUMP_VELOCITY = -400.0
+@export var SPAWN_BOOMERANG_FROM_PLAYER = 100.0
+
 
 var boomerang_instance = null
 
@@ -48,7 +50,7 @@ func throw_boomerang(direction: float):
 		return
 		
 	boomerang_instance = BOOMERANG.instantiate()
-	boomerang_instance.position = position
+	boomerang_instance.position = position + Vector2(SPAWN_BOOMERANG_FROM_PLAYER * direction, 0)
 	boomerang_instance.set("direction", Vector2(direction, 0))
 	get_parent().add_child(boomerang_instance) # this is so the boomerang does not move with the player
 	

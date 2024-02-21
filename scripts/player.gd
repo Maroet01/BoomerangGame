@@ -48,7 +48,7 @@ func throw_boomerang(direction: float):
 		return
 		
 	boomerang_instance = BOOMERANG.instantiate()
-	boomerang_instance.position = Vector2(0,0)
+	boomerang_instance.position = position
 	boomerang_instance.set("direction", Vector2(direction, 0))
 	get_parent().add_child(boomerang_instance) # this is so the boomerang does not move with the player
 	

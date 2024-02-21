@@ -9,29 +9,36 @@ var boomerang_instance = null
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
+	handle_gravity(delta)
+	handle_jump()
+	handle_movement()
+	handle_boomerang_throw()
+	handle_boomerang_recall() 
+	move_and_slide()
 
-	# Handle jump.
+func handle_jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input horizontal_direction and handle the movement/deceleration.
-	# horizontal_direction returns either -1, 0 or 1 depending on if we press "move_left", nothing or "move_right"
+func handle_movement():
 	var horizontal_direction = Input.get_axis("move_left", "move_right")
 	if horizontal_direction:
-		# here we multiply by the horizontal_direction which is either -1, 0 or 1 to direct if we go left, stop or right
 		velocity.x = horizontal_direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	if Input.is_action_just_pressed("shot_left") || Input.is_action_just_pressed("shot_right"):
-		throw_boomerang(Input.get_axis("shot_left", "shot_right"))
-		
-	print(global_position)
-	move_and_slide()
+func handle_boomerang_throw():
+	var shot_left_pressed = Input.is_action_just_pressed("shot_left")
+	var shot_right_pressed = Input.is_action_just_pressed("shot_right")
 
+	if shot_left_pressed or shot_right_pressed:
+		throw_boomerang(Input.get_axis("shot_left", "shot_right"))
+
+func handle_boomerang_recall():
+	var recall_pressed = Input.is_action_just_pressed("recall_boomerang")
+
+	if recall_pressed and boomerang_instance != null:
+		recall_boomerang()
 
 func throw_boomerang(direction: float):
 	const BOOMERANG = preload("res://scenes/boomerang.tscn")
@@ -43,5 +50,13 @@ func throw_boomerang(direction: float):
 	boomerang_instance = BOOMERANG.instantiate()
 	boomerang_instance.position = Vector2(0,0)
 	boomerang_instance.set("direction", Vector2(direction, 0))
-	get_parent().add_child(boomerang_instance) # this is so the boomerang does not move the player
+	get_parent().add_child(boomerang_instance) # this is so the boomerang does not move with the player
 	
+func recall_boomerang():
+	boomerang_instance.queue_free()
+	boomerang_instance = null
+	
+func handle_gravity(delta):
+	# Add the gravity.
+	if not is_on_floor():
+		velocity.y += gravity * delta

@@ -3,12 +3,12 @@ extends StaticBody2D
 
 const SPEED = 200.0
 const RANGE = 1200
-@export var direction = Vector2.RIGHT  # Initial direction
+@export var direction = 1  # Initial direction
 var travelled_distance = 0
 
 func _process(delta):
 	# Bewegung des Boomerangs
-	position += direction * SPEED * delta
+	position += Vector2(direction * SPEED * delta, 0)
 	
 	travelled_distance += SPEED * delta
 	#if travelled_distance > RANGE:

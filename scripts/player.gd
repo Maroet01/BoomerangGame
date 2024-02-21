@@ -3,19 +3,23 @@ extends CharacterBody2D
 @export var SPEED = 300.0
 @export var JUMP_VELOCITY = -400.0
 @export var SPAWN_BOOMERANG_FROM_PLAYER = 100.0
-
+@export var DEATH_HEIGHT = 1000.0
+@export var START_POSITION = Vector2(350, 0)
 
 var boomerang_instance = null
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _ready():
+	position = START_POSITION
 
 func _physics_process(delta):
 	handle_gravity(delta)
 	handle_jump()
 	handle_movement()
 	handle_boomerang_throw()
-	handle_boomerang_recall() 
+	handle_boomerang_recall()
+	check_death()
+	print(position)
 	move_and_slide()
 
 func handle_jump():
@@ -44,21 +48,28 @@ func handle_boomerang_recall():
 
 func throw_boomerang(direction: float):
 	const BOOMERANG = preload("res://scenes/boomerang.tscn")
-	
-	# Wenn der Boomerang noch nicht geworfen wurde, erzeuge einen neuen Boomerang
+
 	if boomerang_instance != null:
 		return
-		
+
 	boomerang_instance = BOOMERANG.instantiate()
 	boomerang_instance.position = position + Vector2(SPAWN_BOOMERANG_FROM_PLAYER * direction, 0)
 	boomerang_instance.set("direction", Vector2(direction, 0))
-	get_parent().add_child(boomerang_instance) # this is so the boomerang does not move with the player
-	
+	get_parent().add_child(boomerang_instance) # this is to avoid the boomerang moving with the player
+
 func recall_boomerang():
 	boomerang_instance.queue_free()
 	boomerang_instance = null
-	
+
 func handle_gravity(delta):
-	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+
+func check_death():
+	if position.y > DEATH_HEIGHT:
+		die()
+
+func die():
+	position = START_POSITION
+	# Hier könntest du zusätzliche Logik hinzufügen, um den Spielerzustand zurückzusetzen
+	# zum Beispiel die Energie, Leben, etc.

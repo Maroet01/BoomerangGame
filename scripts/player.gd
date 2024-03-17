@@ -18,7 +18,6 @@ func _physics_process(delta):
 	handle_movement()
 	handle_boomerang_throw()
 	handle_boomerang_recall()
-	handle_boomerang_riding()
 	check_death()
 	move_and_slide()
 
@@ -31,7 +30,7 @@ func handle_movement():
 	if horizontal_direction:
 		velocity.x = horizontal_direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = 0
 
 func handle_boomerang_throw():
 	var shot_left_pressed = Input.is_action_just_pressed("shot_left")
@@ -56,14 +55,6 @@ func throw_boomerang(direction: float):
 	boomerang_instance.position = position + Vector2(SPAWN_BOOMERANG_FROM_PLAYER * direction, 0)
 	boomerang_instance.set("direction", direction)
 	get_parent().add_child(boomerang_instance) # this is to avoid the boomerang moving with the player
-
-func is_on_boomerang() -> bool:
-	# Überprüfe, ob der Spieler und der Boomerang sich in einem bestimmten Bereich (z.B., Rechtecküberlappung) befinden
-	return position.distance_squared_to(boomerang_instance.position) < 10000  # Hier 10000 durch den tatsächlichen Wert ersetzen
-
-func handle_boomerang_riding():
-	if(Input.is_action_pressed("sneak") and  is_on_boomerang()):
-		velocity = Vector2(boomerang_instance.get("SPEED") * boomerang_instance.get("direction"), 0)
 
 func recall_boomerang():
 	boomerang_instance.queue_free()

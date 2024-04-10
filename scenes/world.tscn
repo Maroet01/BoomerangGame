@@ -16,6 +16,61 @@ script = ExtResource("1_1qvp1")
 [node name="Player" parent="." instance=ExtResource("1_lbj38")]
 JUMP_VELOCITY = -600.0
 
+[node name="Platform9" type="StaticBody2D" parent="."]
+position = Vector2(8670, -372)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform9"]
+modulate = Color(0.156863, 0.207843, 0, 1)
+mesh = SubResource("QuadMesh_05px5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform9"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_m3lxk")
+
+[node name="Platform6" type="StaticBody2D" parent="."]
+position = Vector2(6785, -459)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform6"]
+modulate = Color(0.156863, 0.207843, 0, 1)
+mesh = SubResource("QuadMesh_05px5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_m3lxk")
+
+[node name="Platform5" type="StaticBody2D" parent="."]
+position = Vector2(4510, -401)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform5"]
+modulate = Color(0.156863, 0.207843, 0, 1)
+mesh = SubResource("QuadMesh_05px5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_m3lxk")
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(3447, -134)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform4"]
+modulate = Color(0.156863, 0.207843, 0, 1)
+mesh = SubResource("QuadMesh_05px5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_m3lxk")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(2296, 16)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform3"]
+modulate = Color(0.156863, 0.207843, 0, 1)
+mesh = SubResource("QuadMesh_05px5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_m3lxk")
+
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(1126, 168)
 
@@ -35,5 +90,27 @@ modulate = Color(0.156863, 0.207843, 0, 1)
 mesh = SubResource("QuadMesh_05px5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_m3lxk")
+
+[node name="Platform7" type="StaticBody2D" parent="."]
+position = Vector2(6260, -201)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform7"]
+modulate = Color(0.156863, 0.207843, 0, 1)
+mesh = SubResource("QuadMesh_05px5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform7"]
+position = Vector2(3, -2)
+shape = SubResource("RectangleShape2D_m3lxk")
+
+[node name="Platform8" type="StaticBody2D" parent="."]
+position = Vector2(7339, -99)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform8"]
+modulate = Color(0.156863, 0.207843, 0, 1)
+mesh = SubResource("QuadMesh_05px5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform8"]
 position = Vector2(3, -2)
 shape = SubResource("RectangleShape2D_m3lxk")

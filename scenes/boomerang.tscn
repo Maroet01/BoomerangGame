@@ -7,6 +7,8 @@
 size = Vector2(132, 39)
 
 [node name="Boomerang" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_eb24j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

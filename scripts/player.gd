@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var SPEED = 300.0
+@export var SPEED = 20000
 @export var JUMP_VELOCITY = -400.0
 @export var SPAWN_BOOMERANG_FROM_PLAYER = 100.0
 @export var DEATH_HEIGHT = 1000.0
@@ -15,7 +15,7 @@ func _ready():
 func _physics_process(delta):
 	handle_gravity(delta)
 	handle_jump()
-	handle_movement()
+	handle_movement(delta)
 	handle_boomerang_throw()
 	handle_boomerang_recall()
 	check_death()
@@ -25,10 +25,10 @@ func handle_jump():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-func handle_movement():
+func handle_movement(delta):
 	var horizontal_direction = Input.get_axis("move_left", "move_right")
 	if horizontal_direction:
-		velocity.x = horizontal_direction * SPEED
+		velocity.x = horizontal_direction * SPEED * delta
 	else:
 		velocity.x = 0
 
